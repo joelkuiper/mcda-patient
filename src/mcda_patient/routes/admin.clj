@@ -14,7 +14,7 @@
 
 (defn admin-page []
   (layout/render "admin/home.html"
-                 {:questionnaires []}))
+                 {:questionnaires (questionnaires/query)}))
 
 (defn edit-existing
   [id req]
@@ -39,17 +39,20 @@
   [id {:keys [params] :as req}]
   (let [{:keys [title problem urls]} params]
     (if (= id "new")
-      (let [new-questionnaire (questionnaires/create! title problem urls)]
+      (let [new-questionnaire (questionnaires/create! title problem (parse-int urls))]
         (redirect (str "/admin/" new-questionnaire)))
       (do
-        (questionnaires/edit! (parse-int id) title problem urls)
+        (questionnaires/edit! (parse-int id) title problem parse-int)
         (redirect (str "/admin/" id))))))
 
 (defn view
   [id req]
-  (let [questionnaire (questionnaires/get id)]
-    (if  questionnaire
-      (layout/render "admin/view.html" {})
+  (let [questionnaire (questionnaires/get id)
+        results (questionnaires/results id)]
+    (if (not (nil? questionnaire))
+      (layout/render "admin/view.html"
+                     {:results results
+                      :questionnaire questionnaire})
       (response/not-found (str "could not find questionnaire " id)))))
 
 

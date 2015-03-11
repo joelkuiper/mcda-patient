@@ -9,16 +9,30 @@
         <a style="margin-top: 1.115em" href="{{servlet-context}}/admin/{{questionnaire.id}}/edit" class="right secondary tiny button">edit</a>&nbsp;
       </div>
     </div>
-    <div class="row">
-      <div class="large-6 columns">
-        <p>{{questionnaire.description}}</p>
-      </div>
-    </div>
     <hr>
     <h3>Results</h3>
     <div class="row">
       <div class="large-12 columns">
-        Put some results here
+        <table width="100%">
+          <thead>
+            <tr>
+              <td>URL</td>
+              <td>Last visited</td>
+              <td>Last completed</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for result in results %}
+            <tr>
+              <td><a href="{{servlet-context}}/{{result.url}}">{{result.url}}</a></td>
+              <td>{{result.last_visited}}</td>
+              <td>{{result.last_completed}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+
       </div>
     </div>
   </div>

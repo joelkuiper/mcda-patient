@@ -1,18 +1,27 @@
--- name: get
--- Gets a questionnaire by id
-SELECT * FROM questionnaires WHERE id = :id
+-- name: query-questionnaires
+-- Gets a list of titles and ids
+SELECT questionnaires.*, COUNT(results.questionnaire_id) AS number_of_results
+FROM questionnaires
+LEFT JOIN results
+ON (questionnaires.id = results.questionnaire_id)
+GROUP BY
+questionnaires.id
 
--- name: get-with-results
--- Gets a questionnaire with associated results
-SELECT (questionnaires.*, results.*)
+-- name: get-questionnaire
+-- Gets a questionnaire by id
+SELECT questionnaires.* FROM questionnaires WHERE id = :id
+
+-- name: get-results
+-- Gets results associated with a questionnaire
+SELECT results.*
 FROM questionnaires, results
-WHERE questionnaire.id = :id AND results.questionnaire_id = questionnaire.id
+WHERE questionnaires.id = :id AND results.questionnaire_id = questionnaires.id
 
 -- name: create<!
 -- Creates a questionnaire
-INSERT INTO questionnaires (title, problem) VALUES (:title, :problem) RETURNING id
+INSERT INTO questionnaires (title, problem) VALUES (:title, :problem)
 
--- name: edit!
+-- name: edit-questionnaire!
 -- Edits the questionnaire title and description
 UPDATE projects
 SET
@@ -20,9 +29,9 @@ SET
   problem = :problem,
 WHERE id = :id
 
--- name: insert-results!
+-- name: insert-result!
 -- Inserts a list of urls to results for the specified questionnaire_id
-INSERT INTO results (questionnaire_id, url) VALUES IN (:urls)
+INSERT INTO results (questionnaire_id, url) VALUES (:id, :url)
 
 -- name: save-result!
 -- Saves the result associated with a certain url
