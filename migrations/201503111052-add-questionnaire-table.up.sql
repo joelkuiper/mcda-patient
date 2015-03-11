@@ -9,8 +9,8 @@ CREATE TABLE results
 (id IDENTITY PRIMARY KEY,
  questionnaire_id BIGINT REFERENCES questionnaires (id),
  answers CLOB,
- last_completed TIMESTAMP DEFAULT current_timestamp,
- last_visited TIMESTAMP DEFAULT current_timestamp,
+ last_completed TIMESTAMP DEFAULT NULL,
+ last_visited TIMESTAMP DEFAULT NULL,
  url VARCHAR(5) UNIQUE,
 );
 CREATE INDEX ON results (questionnaire_id);

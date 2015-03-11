@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="row">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns clearfix last">
+        <h2 class="left">{{questionnaire.title}}</h2>
+        <a style="margin-top: 1.115em" href="{{servlet-context}}/admin/{{questionnaire.id}}/export" class="right tiny button">export results</a>
+        <a style="margin-top: 1.115em" href="{{servlet-context}}/admin/{{questionnaire.id}}/edit" class="right secondary tiny button">edit</a>&nbsp;
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns">
+        <p>{{questionnaire.description}}</p>
+      </div>
+    </div>
+    <hr>
+    <h3>Results</h3>
+    <div class="row">
+      <div class="large-12 columns">
+        Put some results here
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

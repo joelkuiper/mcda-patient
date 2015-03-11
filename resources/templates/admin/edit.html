@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="row">
+  <div class="columns large-12">
+    <h2>{% ifequal questionnaire-id "new" %}Create questionnaire{% else %}Edit: {{questionnaire.title|title}}{% endifequal %}</h2>
+    <form action="{{servlet-context}}/admin/{{questionnaire-id}}" method="POST">
+      <div class="row">
+        <div class="large-5 columns">
+          <label>Title
+            <input type="text" name="title" placeholder="Title" value="{{questionnaire.title}}" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-5 columns">
+          <label>Problem JSON
+            <textarea name="problem" rows="6" placeholder="Problem JSON">{{questionnaire.problem}}</textarea>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-5 columns">
+          <label>Number of URLs to generate
+            <input type="number" name="urls" min="1" max="255">{{questionnaire.urls}}</textarea>
+          </label>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="large-5 columns">
+          <input type="hidden" name="questionnaire-id" value="{{questionnaire-id}}">
+          <input type="hidden" name="__anti-forgery-token" value="{% csrf-token %}">
+          {% ifequal questionnaire-id "new" %}
+          <input type="submit" class="button" value="Create"></input>
+          {% else %}
+          <input type="submit" class="button" value="Edit"></input>
+          {% endifequal %}
+          <a onclick="history.go(-1);" class="button secondary">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

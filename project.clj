@@ -17,10 +17,12 @@
                  [ring-middleware-format "0.4.0"]
                  [noir-exception "0.2.3"]
                  [bouncer "0.3.2"]
+                 [lib-noir "0.9.0"]
                  [prone "0.8.0"]
                  [buddy "0.3.0"]
                  [ragtime "0.3.8"]
                  [yesql "0.5.0-rc1"]
+                 [crypto-random "1.2.0"]
                  [com.h2database/h2 "1.4.182"]]
 
   :min-lein-version "2.0.0"

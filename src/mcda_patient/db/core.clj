@@ -12,5 +12,3 @@
    :make-pool?  true
    :naming      {:keys   clojure.string/lower-case
                  :fields clojure.string/upper-case}})
-
-(defqueries "sql/queries.sql" {:connection db-spec})
