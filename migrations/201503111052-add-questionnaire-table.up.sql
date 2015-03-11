@@ -1,14 +1,14 @@
 CREATE TABLE questionnaires
 (id IDENTITY PRIMARY KEY,
  title VARCHAR,
- problem TEXT,
+ problem CLOB,
  date_created TIMESTAMP DEFAULT current_timestamp
 );
 
 CREATE TABLE results
 (id IDENTITY PRIMARY KEY,
  questionnaire_id BIGINT REFERENCES questionnaires (id),
- answers TEXT,
+ answers CLOB,
  last_completed TIMESTAMP DEFAULT NULL,
  last_visited TIMESTAMP DEFAULT NULL,
  url VARCHAR(8) UNIQUE,

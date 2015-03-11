@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width" />
 
     <title>mcda.drugis.org</title>
+    <script type="text/javascript">
+     var models = {}
+     var config = {
+         _csrf_token : "{{csrf-token}}",
+         _csrf_header : "X-CSRF-TOKEN",
+     }
+     var context = "{{servlet-context}}";
+    </script>
+
     <script src="{{servlet-context}}bower_components/requirejs/require.js" data-main="{{servlet-context}}/js/main.js"></script>
 
   </head>
@@ -35,13 +44,6 @@
     {% endblock %}
 
     <div class="push"></div>
-
-    <script type="text/javascript">
-     var config = {
-         CRFT_TOKEN: "{{ csrf-token }}"
-     }
-     var context = "{{servlet-context}}";
-    </script>
     {% block page-scripts %}
     {% endblock %}
 

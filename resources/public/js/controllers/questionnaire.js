@@ -4,7 +4,7 @@ define(function(require) {
   var _ = require("underscore");
   var Wizard = require("./helpers/wizard");
 
-  return function(Config, $scope, $state, $injector, currentWorkspace, RootPath) {
+  return function(Config, $scope, $state, $injector, $http, currentWorkspace, RootPath) {
     var steps = angular.copy(Config.steps);
     var currentHandler = null;
 
@@ -34,8 +34,13 @@ define(function(require) {
 
 
     $scope.submit = function(state) {
-      console.log("I will store this crap", state);
-      $state.go("thankYou");
+      var results = {'results': _.pick(state, ['prefs', 'personal'])};
+
+      $http.post("/" + window.models.id, results).success(function(data) {
+        $state.go("thankYou");
+      }).error(function(data, status) {
+        $scope.$root.$broadcast("error", data, status);
+      });
     };
 
     $scope.isDone = function() {
@@ -43,9 +48,5 @@ define(function(require) {
     };
 
     initializeStep(steps.shift(), currentWorkspace);
-
-
-
   };
-
 });

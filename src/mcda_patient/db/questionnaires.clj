@@ -3,6 +3,7 @@
   (:require [mcda-patient.layout :as layout]
             [yesql.core :refer [defquery defqueries]]
             [taoensso.timbre :as timbre]
+            [cheshire.core :refer :all]
             [mcda-patient.db.core :refer [db-spec]]
             [clojure.java.jdbc :as jdbc]))
 
@@ -11,25 +12,57 @@
 
 (timbre/refer-timbre)
 
+(defn clob-to-string [clob]
+  (with-open [rdr (java.io.BufferedReader. (.getCharacterStream clob))]
+    (apply str (line-seq rdr))))
+
 (defn random-url [] (crypto.random/url-part 5))
 
 (defn query [] (query-questionnaires))
 
-(defn get [id] (first (get-questionnaire {:id id})))
+(defn with-decoded-problem-clob
+  [questionnaire]
+  (assoc questionnaire :problem (parse-string (clob-to-string (:problem questionnaire)))))
+
+(defn get
+  ([id] (jdbc/with-db-transaction [tx db-spec] (get id tx)))
+  ([id tx]
+   (when-let [questionnaire (first (get-questionnaire {:id id} {:connection tx}))]
+     (with-decoded-problem-clob questionnaire))))
 
 (defn results [id]
   (get-results {:id id}))
 
+(defn round-trip-json
+  "This round trips the JSON, will fail if the input was not valid JSON.
+  It's a nasty hack to get some fail-fast input validation"
+  [str]
+  (generate-string (parse-string str)))
+
 (defn create!
   [title problem num-urls]
-  (debug title problem num-urls)
-
-  (let [id (first (vals (create<! {:title title :problem problem})))
+  (let [id (first (vals (create<! {:title title :problem (round-trip-json problem)})))
         urls (map vector (repeat id) (take num-urls (repeatedly random-url)))]
     (debug "inserting" urls "with id" id)
-    (jdbc/with-db-transaction [connection db-spec]
-      (doall (map (fn [[id url]] (insert-result! {:id id :url url})) urls)))
+    (jdbc/with-db-transaction [tx db-spec]
+      (doall (map (fn [[id url]] (insert-result! {:id id :url url} {:connection tx})) urls)))
     id))
 
 (defn edit!
-  [id title problem urls])
+  [id title problem num-urls]
+  (edit-questionnaire!
+   {:id id
+    :problem (round-trip-json problem)
+    :title title}))
+
+(defn visit
+  [url]
+  (jdbc/with-db-transaction [tx db-spec]
+    (let [questionnaire (first (get-questionnaire-by-url {:url url} {:connection tx}))]
+      (visit-questionnaire! {:url url} {:connection tx})
+      (with-decoded-problem-clob questionnaire))))
+
+
+(defn save-result!
+  [url answers]
+  (save-answers! {:answers answers :url url}))

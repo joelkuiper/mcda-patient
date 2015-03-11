@@ -18,10 +18,10 @@
     {% endif %}
     {% for questionnaire in questionnaires|sort-by:title %}
     <tr>
-      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}">{{questionnaire.title}}</a></td>
-      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit"><i class="fa fa-edit fa-tiny" /></a></td>
-      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit"><i class="fa fa-list-ol fa-tiny" /></a></td>
-      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit"><i class="fa fa-bar-chart fa-tiny" /></a></td>
+      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/">{{questionnaire.title}}</a></td>
+      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit/"><i class="fa fa-edit fa-tiny" /></a></td>
+      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit/"><i class="fa fa-list-ol fa-tiny" /></a></td>
+      <td><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit/"><i class="fa fa-bar-chart fa-tiny" /></a></td>
     </tr>
     {% endfor %}
   </tbody>

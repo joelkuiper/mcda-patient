@@ -48,7 +48,7 @@ define(function(require) {
       controller: "QuestionnaireController",
       resolve: {
         currentWorkspace: function($stateParams, WorkspaceResource, Config) {
-          return WorkspaceResource.get({"workspaceId": Config.defaultQuestionaire}).$promise;
+          return WorkspaceResource.get().promise;
         }
       }
     });
@@ -60,12 +60,10 @@ define(function(require) {
       controller: "ThankYouController",
       resolve: {
         currentWorkspace: function($stateParams, WorkspaceResource, Config) {
-          return WorkspaceResource.get({"workspaceId": Config.defaultQuestionaire}).$promise;
+          return WorkspaceResource.get().promise;
         }
       }
     });
-
-
 
     $urlRouterProvider.otherwise("/questionnaire");
   });

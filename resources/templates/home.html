@@ -1,4 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-  <div ui-view></div>
+<div ui-view></div>
+<script>
+ window.models.problem = {{problem|json|safe}};
+ window.models.id = "{{id|safe}}";
+</script>
+
 {% endblock %}

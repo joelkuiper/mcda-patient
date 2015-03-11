@@ -24,8 +24,6 @@ define(function(require) {
 
   return {
     steps: steps,
-    sequence: ["introduction", "ordinal-swing", "exact-swing", "personal-info"],
-    workspacesRepositoryUrl: "/questionnaires/",
-    defaultQuestionaire: "regorafenib.json"
+    sequence: ["introduction", "ordinal-swing", "exact-swing", "personal-info"]
   };
 });

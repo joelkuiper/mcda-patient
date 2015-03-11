@@ -52,8 +52,8 @@
 
 (def app
   (-> (routes
-      home-routes
       admin-routes
+      home-routes
       base-routes)
      development-middleware
      production-middleware))
