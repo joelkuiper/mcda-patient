@@ -1,0 +1,28 @@
+<div ng-if="state.type == 'elicit'">
+  <div class="row">
+    <div class="columns large-12">
+      <h3 ng-bind="state.title"></h3>
+      <h5 class="subheader">Given the following situation:</h5>
+      <ul class="inline-list">
+        <li ng-repeat="(criterion, value) in state.reference track by $index">
+          {{state.problem.criteria[criterion].title}} = {{value | number }}
+        </li>
+      </ul>
+
+      <h5 class="subheader">Which of these improvements is most desired:</h5>
+      <label ng-repeat="(choice, alternative) in state.choices">
+        <input type="radio" ng-model="state.choice" value="{{choice}}" />
+        <criterion of="state.problem.criteria[choice]"></criterion> &rarr; {{alternative[choice] | number }}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div ng-if="state.type == 'review'">
+  <div class="row">
+    <div class="columns large-12">
+      <h3 ng-bind="state.title"></h3>
+      <br>
+    </div>
+  </div>
+</div>

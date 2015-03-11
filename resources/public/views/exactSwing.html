@@ -1,0 +1,39 @@
+<div ng-if="state.step <= state.total">
+  <div class="row">
+    <div class="columns large-12">
+      <h3>{{title(state.step, state.total)}}</h3>
+      <h5 class="subheader">Determining the relative importance of:</h5>
+      <ul>
+        <li ng-repeat="criterion in [state.criterionA, state.criterionB] track by $index">
+          <criterion of="state.problem.criteria[criterion]"></criterion>
+          ({{pvf.worst(state.problem.criteria[criterion]) | number}} &rarr;
+          {{pvf.best(state.problem.criteria[criterion]) | number}})
+        </li>
+      </ul>
+
+      <strong>Given the following situation:</strong>
+      <p>
+        {{state.problem.criteria[state.criterionA].title}} =
+        {{pvf.worst(state.problem.criteria[state.criterionA]) | number}},
+        {{state.problem.criteria[state.criterionB].title}} =
+        {{pvf.best(state.problem.criteria[state.criterionB]) | number}}
+
+        <br>
+        <strong>Adjust the slider:</strong>
+        <label>
+          <slider style="width: 400px; margin-top: 20px" model="state.choice" type="point" range="state.range"></slider>
+        </label>
+      </p>
+
+      <strong>So that the following alternative is equally desirable:</strong>
+      <p>
+        {{state.problem.criteria[state.criterionA].title}} = <span class="label secondary">{{state.choice}}</span>
+        {{state.problem.criteria[state.criterionB].title}} = {{pvf.worst(state.problem.criteria[state.criterionB]) | number}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div ng-if="state.step > state.total">
+  You've made the following trade-offs. There is no going back.
+</div>

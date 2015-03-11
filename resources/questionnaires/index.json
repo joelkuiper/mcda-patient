@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Rimonabant Example",
+    "href": "rimonabant.json"
+  },
+  {
+    "title": "Thrombolytics Example",
+    "href": "thrombolytics.json"
+  },
+  {
+    "title": "Nemeroff and Thase anti-depressants Example (Beta-distributed measurements)",
+    "href": "nemeroff.json"
+  },
+  {
+    "title": "Nemeroff and Thase anti-depressants Example (Point estimate measurements)",
+    "href": "nemeroff-exact.json"
+  },
+  {
+    "title": "Hansen et. al. 2005 anti-depressants Example",
+    "href": "hansen.json"
+  },
+  {
+    "title": "Fava et. al. 2002 anti-depressants Example",
+    "href": "fava.json"
+  },
+  {
+    "title": "EMA D80 hypertension example",
+    "href": "hypertension.json"
+  },
+  {
+    "title": "Regorafenib - Initial marketing authorization application",
+    "href": "regorafenib.json"
+  }
+]

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Danger zone!</title>
+  </head>
+
+  <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">Admin Dashboard</a></h1>
+        </li>
+      </ul>
+    </nav>
+
+    <section>
+      <div class="color-stripe"></div>
+    </section>
+
+    <div class="row">
+      <div class="columns large-12">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div class="push"></div>
+
+    <script type="text/javascript">
+     var config = {
+         CRFT_TOKEN: "{{csrf-token}}"
+     }
+     var context = "{{servlet-context}}";
+    </script>
+    {% block page-scripts %}
+    {% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{{servlet-context}}/css/mcda-drugis.css">
+  </body>
+</html>

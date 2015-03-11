@@ -1,0 +1,22 @@
+<div>
+  <div class="row" style="min-height: 400px;">
+    <div class="large-12 columns">
+      <div ng-include="stepTemplate"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns large-12">
+      <button class="small button" ng-click="previousState()" ng-disabled="!canReturn()">Previous</button>
+      <button class="small button"
+              ng-if="!isFinished(state)"
+              ng-click="nextState(state)"
+              ng-disabled="!canProceed(state)">Next</button>
+     <button class="small button success"
+              ng-if="isFinished(state) && !isDone()"
+              ng-click="proceed(state)">Proceed</button>
+     <button class="small button success"
+              ng-if="isDone()"
+              ng-click="submit(state)">Finish</button>
+    </div>
+  </div>
+</div>

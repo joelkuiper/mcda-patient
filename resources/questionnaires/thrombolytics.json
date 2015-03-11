@@ -1,0 +1,128 @@
+{
+  "title": "Thrombolytics Example",
+  "criteria": {
+    "Prox DVT": {
+      "title": "Proximal DVT",
+      "description": "Proximal deep vein thrombolytic events, often associated with serious complications.",
+      "unitOfMeasurement": "Proportion",
+      "scale": [0.0, 1.0],
+      "pvf": {
+        "range": [
+          0,
+          0.25
+        ],
+        "type": "linear",
+        "direction": "decreasing"
+      }
+    },
+    "Dist DVT": {
+      "title": "Distal DVT",
+      "description": "Distal deep vein thrombolytic events.",
+      "unitOfMeasurement": "Proportion",
+      "scale": [0.0, 1.0],
+      "pvf": {
+        "range": [
+          0.15,
+          0.4
+        ],
+        "type": "linear",
+        "direction": "decreasing"
+      }
+    },
+    "Bleed": {
+      "title": "Major bleeding",
+      "description": "Major bleeding events.",
+      "unitOfMeasurement": "Proportion",
+      "scale": [0.0, 1.0],
+      "pvf": {
+        "range": [
+          0,
+          0.1
+        ],
+        "type": "linear",
+        "direction": "decreasing"
+      }
+    }
+  },
+  "valueTree": {
+    "title": "Benefit-risk balance", 
+    "children": [
+      {
+        "title": "Favourable effects",
+        "children": [
+          {
+            "title": "Primary efficacy",
+            "criteria": [ "Prox DVT" ]
+          },
+          {
+            "title": "Secondary efficacy",
+            "criteria": [ "Dist DVT" ]
+          }
+        ]
+      },
+      {
+        "title": "Unfavourable effects",
+        "criteria": [ "Bleed" ]
+      }
+    ]
+  },
+  "alternatives": {
+    "Hep": {
+      "title": "Heparin"
+    },
+    "Enox": {
+      "title": "Enoxaparin"
+    }
+  },
+  "performanceTable": [
+    {
+    "alternative": "Hep",
+    "criterion": "Prox DVT",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 20, "beta": 116 }
+    }
+  },
+  {
+    "alternative": "Hep",
+    "criterion": "Dist DVT",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 40, "beta": 96 }
+    }
+  },
+  {
+    "alternative": "Hep",
+    "criterion": "Bleed",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 1, "beta": 135 }
+    }
+  },
+  {
+    "alternative": "Enox",
+    "criterion": "Prox DVT",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 8, "beta": 121 }
+    }
+  },
+  {
+    "alternative": "Enox",
+    "criterion": "Dist DVT",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 32, "beta": 97 }
+    }
+  },
+  {
+    "alternative": "Enox",
+    "criterion": "Bleed",
+    "performance": {
+      "type": "dbeta",
+      "parameters": { "alpha": 5, "beta": 124 }
+    }
+  }
+  ],
+  "preferences": {}
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>mcda.drugis.org</title>
+    <script src="{{servlet-context}}bower_components/requirejs/require.js" data-main="{{servlet-context}}/js/main.js"></script>
+
+  </head>
+
+  <body>
+    <div>
+      <top-bar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#/">Patient Preferences</a></h1>
+          </li>
+        </ul>
+      </top-bar>
+    </div>
+
+    <section>
+      <div class="color-stripe"></div>
+    </section>
+
+    <div ng-if="error" class="row" ng-cloak>
+      <div class="columns">
+        <addis-alert type="alert" close="error.close()">{{error.code}} {{error.cause}}<span ng-show="error.error">&mdash; {{error.error}}</span></addis-alert>
+      </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="push"></div>
+
+    <script type="text/javascript">
+     var config = {
+         CRFT_TOKEN: "{{ csrf-token }}"
+     }
+     var context = "{{servlet-context}}";
+    </script>
+    {% block page-scripts %}
+    {% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{{servlet-context}}/css/mcda-drugis.css">
+  </body>
+</html>
