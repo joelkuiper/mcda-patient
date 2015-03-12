@@ -31,7 +31,6 @@ define(function(require) {
       criteria = state.problem.criteria;
       var fields = {
         title: title(1),
-        type: 'elicit',
         prefs: {
           ordinal: []
         },
@@ -76,10 +75,9 @@ define(function(require) {
       next(choice);
 
       if (_.size(nextState.choices) === 1) {
+        console.log("Last question");
         next(_.keys(nextState.choices)[0]);
-        nextState.type = 'review';
       }
-
 
       return nextState;
     };
@@ -107,13 +105,21 @@ define(function(require) {
     }
 
     var isFinished = function(state) {
-      return state && _.size(state.choices) === 0;
+      return state && _.size(state.choices) === 2;
+    };
+
+    var save = function(state) {
+      var next = nextState(state);
+      var prefs = next.prefs;
+      next.prefs = standardize(prefs);
+      return _.pick(next, ['problem', 'prefs']);
     };
 
     return {
       validChoice: validChoice,
-      fields: ['choice', 'reference', 'choices', 'type', 'standardized'],
+      fields: ['choice', 'reference', 'choices', 'standardized'],
       nextState: nextState,
+      save: save,
       initialize: _.partial(initialize, currentWorkspace),
       standardize: standardize,
       isFinished: isFinished

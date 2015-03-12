@@ -27,8 +27,9 @@ define(function(require) {
 
     $scope.proceed = function(state) {
       if(steps.length === 0) return;
-      state.prefs = currentHandler.standardize(state.prefs);
-      state = _.pick(state, ['problem', 'prefs']);
+      if(currentHandler.save) {
+        state = currentHandler.save(state);
+      }
       initializeStep(steps.shift(), state);
     };
 

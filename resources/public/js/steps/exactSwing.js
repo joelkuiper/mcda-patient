@@ -103,9 +103,13 @@ define(function(require) {
 
 
     var isFinished = function(state) {
-      return state && state.step === state.total + 1;
+      return state && state.step === state.total;
     };
 
+    var save = function(state) {
+      var next = nextState(state);
+      return _.pick(next, ['problem', 'prefs']);
+    };
 
     return {
       isFinished: isFinished,
@@ -113,6 +117,7 @@ define(function(require) {
       fields: ['prefs', 'total', 'choice', 'criteriaOrder', 'criterionA', 'criterionB'],
       nextState: nextState,
       standardize: _.identity,
+      save: save,
       initialize: _.partial(initialize, currentWorkspace)
     };
   };

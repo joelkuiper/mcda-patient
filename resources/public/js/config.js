@@ -11,6 +11,11 @@ define(function(require) {
     handler: 'ordinalSwing',
     templateUrl: 'ordinalSwing.html'
   }, {
+    id: 'explain-trade-off',
+    title: 'Explaining Trade Off steps',
+    handler: 'explainTradeOff',
+    templateUrl: 'explainTradeOff.html'
+  }, {
     id: 'exact-swing',
     title: 'Exact Swing Elicitation',
     handler: 'exactSwing',
@@ -24,6 +29,6 @@ define(function(require) {
 
   return {
     steps: steps,
-    sequence: ["introduction", "ordinal-swing", "exact-swing", "personal-info"]
+    sequence: ["introduction", "ordinal-swing", "explain-trade-off", "exact-swing", "personal-info"]
   };
 });
