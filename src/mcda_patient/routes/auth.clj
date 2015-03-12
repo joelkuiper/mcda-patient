@@ -8,7 +8,7 @@
             [mcda-patient.layout :as layout]))
 
 (def users
-  {:admin {:password (or (str (env :admin-password)) (hashers/encrypt "FIXME"))}})
+  {:admin {:password (or (env :admin-password) (hashers/encrypt "FIXME"))}})
 
 (defn handle-login [username password request]
   (let [session (:session request)

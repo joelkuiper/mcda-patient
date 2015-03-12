@@ -52,7 +52,7 @@ WHERE url = :url
 
 -- name: get-results-by-id
 -- Gets the results associated with a specific questionnaire id
-SELECT results.answers, results.url, results.last_completed
+SELECT results.*
 FROM results, questionnaires
 WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
 

@@ -49,7 +49,6 @@
 
   :profiles {:uberjar {:omit-source true
                        :env {:production true}
-
                        :aot :all}
              :production {:ring {:open-browser? false
                                  :stacktraces?  false
