@@ -20,15 +20,9 @@ define(function(require) {
     title: 'Exact Swing Elicitation',
     handler: 'exactSwing',
     templateUrl: 'exactSwing.html'
-  }, {
-    id: 'personal-info',
-    title: 'About you',
-    handler: 'personalInfo',
-    templateUrl: 'personalInfo.html'
   }];
 
   return {
-    steps: steps,
-    sequence: ["introduction", "ordinal-swing", "explain-trade-off", "exact-swing"]
+    steps: steps
   };
 });

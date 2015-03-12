@@ -11,11 +11,11 @@
               ng-if="!isFinished(state)"
               ng-click="nextState(state)"
               ng-disabled="!canProceed(state)">Next</button>
+     <button class="small button"
+              ng-if="isFinished(state) && !isDone(state)"
+              ng-click="proceed(state)">Next</button>
      <button class="small button success"
-              ng-if="isFinished(state) && !isDone()"
-              ng-click="proceed(state)">Proceed</button>
-     <button class="small button success"
-              ng-if="isDone()"
+              ng-if="isDone(state)"
               ng-click="submit(state)">Finish</button>
     </div>
   </div>
