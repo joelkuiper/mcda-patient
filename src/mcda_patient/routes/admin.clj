@@ -3,7 +3,7 @@
             [compojure.core :refer :all]
             [taoensso.timbre :as timbre]
             [ring.util.response :as response]
-            [noir.response :refer [redirect]]
+            [noir.response :refer [redirect json]]
             [mcda-patient.db.questionnaires :as questionnaires]))
 
 
@@ -57,6 +57,19 @@
                       :questionnaire questionnaire})
       (response/not-found (str "could not find questionnaire " id)))))
 
+(defn get-results
+  [id]
+  (json (questionnaires/results id))
+  )
+
+(defn get-urls
+  [id req]
+  (let [prefix (str (name (:scheme req))  "://" (get (:headers req) "host") "/")]
+    (loop [result "" urls (into [] (questionnaires/get-urls id))]
+      (if (empty? urls)
+        result
+        (recur (str result prefix (peek urls) "\n") (pop urls))))))
+
 
 (defroutes admin-routes
   (context "/admin" []
@@ -66,5 +79,9 @@
                          (view (parse-int questionnaire-id) req))
                     (POST "/" [:as req]
                           (handle-edit questionnaire-id req))
+                    (GET "/export-results" []
+                         (get-results questionnaire-id))
+                    (GET "/export-urls" [:as req]
+                         (get-urls questionnaire-id req))
                     (GET "/edit" [:as req]
                          (edit-page questionnaire-id req)))))

@@ -5,8 +5,11 @@
     <div class="row">
       <div class="large-12 columns clearfix last">
         <h2 class="left">{{questionnaire.title}}</h2>
-        <a style="margin-top: 1.115em" href="{{servlet-context}}/admin/{{questionnaire.id}}/export" class="right tiny button">export results</a>
-        <a style="margin-top: 1.115em" href="{{servlet-context}}/admin/{{questionnaire.id}}/edit" class="right secondary tiny button">edit</a>&nbsp;
+        <ul class="button-group right" style="margin-top: 0.75em">
+          <li><a href="{{servlet-context}}/admin/{{questionnaire.id}}/export-results" download="{{questionnaire.title}}_results.json"class="button secondary tiny">Export results</a></li>
+          <li><a href="{{servlet-context}}/admin/{{questionnaire.id}}/export-urls" download="{{questionnaire.title}}_urls.txt" class="button secondary tiny">Export urls</a></li>
+          <li><a href="{{servlet-context}}/admin/{{questionnaire.id}}/edit" class="button tiny">Edit</a></li>
+        </ul>
       </div>
     </div>
     <hr>
@@ -31,8 +34,6 @@
             {% endfor %}
           </tbody>
         </table>
-
-
       </div>
     </div>
   </div>

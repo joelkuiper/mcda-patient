@@ -5,7 +5,6 @@
             [mcda-patient.middleware :refer [development-middleware production-middleware]]
             [mcda-patient.session :as session]
             [ring.middleware.defaults :refer [site-defaults]]
-            [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]
             [compojure.route :as route]
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.rotor :as rotor]
@@ -38,7 +37,6 @@
   (if (env :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
-  (parser/add-tag! :csrf-token (fn [_ _] *anti-forgery-token*))
   (timbre/info "\n-=[ mcda-patient started successfully"
                (when (env :dev) "using the development profile") "]=-"))
 

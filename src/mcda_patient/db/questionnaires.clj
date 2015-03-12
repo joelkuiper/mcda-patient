@@ -13,8 +13,9 @@
 (timbre/refer-timbre)
 
 (defn clob-to-string [clob]
-  (with-open [rdr (java.io.BufferedReader. (.getCharacterStream clob))]
-    (apply str (line-seq rdr))))
+  (when-not (nil? clob)
+    (with-open [rdr (java.io.BufferedReader. (.getCharacterStream clob))]
+      (apply str (line-seq rdr)))))
 
 (defn random-url [] (crypto.random/url-part 5))
 
@@ -29,9 +30,6 @@
   ([id tx]
    (when-let [questionnaire (first (get-questionnaire {:id id} {:connection tx}))]
      (with-decoded-problem-clob questionnaire))))
-
-(defn results [id]
-  (get-results {:id id}))
 
 (defn round-trip-json
   "This round trips the JSON, will fail if the input was not valid JSON.
@@ -62,7 +60,16 @@
       (visit-questionnaire! {:url url} {:connection tx})
       (with-decoded-problem-clob questionnaire))))
 
-
 (defn save-result!
   [url answers]
-  (save-answers! {:answers answers :url url}))
+  (save-answers! {:answers (generate-string answers) :url url}))
+
+(defn results
+  [id]
+  (jdbc/with-db-transaction [tx db-spec]
+    (let [results (get-results-by-id {:id id} {:connection tx})]
+      (doall (map (fn [result] (assoc result :answers (parse-string (clob-to-string (:answers result))))) results)))))
+
+(defn get-urls
+  [id]
+  (map :url (get-urls-by-id {:id id})))

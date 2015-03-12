@@ -19,12 +19,6 @@ WHERE
 results.url = :url AND questionnaires.id = results.questionnaire_id
 LIMIT 1
 
--- name: get-results
--- Gets results associated with a questionnaire
-SELECT results.*
-FROM questionnaires, results
-WHERE questionnaires.id = :id AND results.questionnaire_id = questionnaires.id
-
 -- name: create<!
 -- Creates a questionnaire
 INSERT INTO questionnaires (title, problem) VALUES (:title, :problem)
@@ -55,3 +49,15 @@ UPDATE results
 SET
   last_visited = current_timestamp
 WHERE url = :url
+
+-- name: get-results-by-id
+-- Gets the results associated with a specific questionnaire id
+SELECT results.answers, results.url, results.last_completed
+FROM results, questionnaires
+WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
+
+-- name: get-urls-by-id
+-- Gets a simple list of all the urls associated with a questionnaire id
+SELECT results.url
+FROM results, questionnaires
+WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
