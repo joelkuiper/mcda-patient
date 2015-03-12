@@ -1,5 +1,6 @@
 (ns mcda-patient.middleware
   (:require [mcda-patient.session :as session]
+            [mcda-patient.security :as security]
             [taoensso.timbre :as timbre]
             [environ.core :refer [env]]
             [selmer.middleware :refer [wrap-error-page]]
@@ -10,7 +11,8 @@
             [noir-exception.core :refer [wrap-internal-error]]
             [ring.middleware.session.memory :refer [memory-store]]
             [ring.middleware.format :refer [wrap-restful-format]]
-            [buddy.auth.middleware :refer [wrap-authentication]]
+            [buddy.auth.accessrules :refer [wrap-access-rules]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.backends.session :refer [session-backend]]))
 
 (defn log-request [handler]
@@ -27,11 +29,13 @@
 
 (defn production-middleware [handler]
   (-> handler
-      (wrap-authentication (session-backend))
-      wrap-restful-format
-      (wrap-idle-session-timeout
-        {:timeout (* 60 30)
-         :timeout-response (redirect "/")})
-      (wrap-defaults
-        (assoc-in site-defaults [:session :store] (memory-store session/mem)))
-      (wrap-internal-error :log #(timbre/error %))))
+     (wrap-access-rules {:rules security/rules :on-error security/unauthorized-handler})
+     (wrap-authentication (session-backend))
+     (wrap-authorization (session-backend))
+     wrap-restful-format
+     (wrap-idle-session-timeout
+      {:timeout (* 60 30)
+       :timeout-response (redirect "/")})
+     (wrap-defaults
+      (assoc-in site-defaults [:session :store] (memory-store session/mem)))
+     (wrap-internal-error :log #(timbre/error %))))

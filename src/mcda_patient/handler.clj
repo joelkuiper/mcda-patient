@@ -1,5 +1,6 @@
 (ns mcda-patient.handler
   (:require [compojure.core :refer [defroutes routes]]
+            [mcda-patient.routes.auth :refer [auth-routes]]
             [mcda-patient.routes.home :refer [home-routes]]
             [mcda-patient.routes.admin :refer [admin-routes]]
             [mcda-patient.middleware :refer [development-middleware production-middleware]]
@@ -50,6 +51,7 @@
 
 (def app
   (-> (routes
+      auth-routes
       admin-routes
       home-routes
       base-routes)
