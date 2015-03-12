@@ -46,6 +46,8 @@
   :ragtime {:migrations ragtime.sql.files/migrations
             :database "jdbc:h2:./site.db"}
 
+  :env {:admin-password "bcrypt+sha512$6007942c86cba182636c3abe$12$2432612431322432566d337061496d70782e5852672e5454725548742e3368365266627a6b6f697230796959686675756e6c7079562e71496d325a79" ; test
+        }
 
   :profiles {:uberjar {:omit-source true
                        :env {:production true}
