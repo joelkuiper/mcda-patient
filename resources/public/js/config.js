@@ -29,6 +29,6 @@ define(function(require) {
 
   return {
     steps: steps,
-    sequence: ["introduction", "ordinal-swing", "explain-trade-off", "exact-swing", "personal-info"]
+    sequence: ["introduction", "ordinal-swing", "explain-trade-off", "exact-swing"]
   };
 });
