@@ -1,0 +1,39 @@
+<div>
+  <div class="row">
+    <div class="columns large-12">
+      <h3>{{title(state.step, state.total)}}</h3>
+      <h5 class="subheader">Determining the relative importance of:</h5>
+      {{ state.prefs | json }}
+      <ul>
+        <li ng-repeat="criterion in [state.criterionA, state.criterionB] track by $index">
+          <criterion of="state.problem.criteria[criterion]"></criterion>
+          ({{pvf.worst(state.problem.criteria[criterion]) | number}} &rarr;
+          {{pvf.best(state.problem.criteria[criterion]) | number}})
+        </li>
+      </ul>
+
+      <strong>Select the alternative you prefer:</strong>
+      <table>
+        <tr>
+          <td rowspan="2"><input type="radio" ng-model="state.choice" value="{{state.criterionB}}"></td>
+          <td><criterion of="state.problem.criteria[state.criterionA]"></criterion></td>
+          <td>= {{pvf.worst(state.problem.criteria[state.criterionA]) | number}}</td>
+        </tr>
+        <tr>
+          <td><criterion of="state.problem.criteria[state.criterionB]"></criterion></td>
+          <td>= {{pvf.best(state.problem.criteria[state.criterionB]) | number}}</td>
+        </tr>
+
+        <tr>
+          <td rowspan="2"><input type="radio" ng-model="state.choice" value="{{state.criterionA}}"></td>
+          <td><criterion of="state.problem.criteria[state.criterionA]"></criterion></td>
+          <td>= {{pvf.inv(state.problem.criteria[state.criterionA])(state.cutoff) | number}}</td>
+        </tr>
+        <tr>
+          <td><criterion of="state.problem.criteria[state.criterionB]"></criterion></td>
+          <td>= {{pvf.worst(state.problem.criteria[state.criterionB]) | number}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -35,6 +35,9 @@ define(function(require) {
 
 
     $scope.submit = function(state) {
+      if (currentHandler.save) {
+        state = currentHandler.save(state);
+      }
       var results = {'results': _.pick(state, ['prefs', 'personal'])};
 
       $http.post("/" + window.models.id, results).success(function(data) {
