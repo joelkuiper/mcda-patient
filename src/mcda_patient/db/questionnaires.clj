@@ -17,7 +17,7 @@
     (with-open [rdr (java.io.BufferedReader. (.getCharacterStream clob))]
       (apply str (line-seq rdr)))))
 
-(defn random-url [] (crypto.random/url-part 5))
+(defn random-url [] (crypto.random/base32 5))
 
 (defn query [] (query-questionnaires))
 
