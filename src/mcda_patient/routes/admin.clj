@@ -59,8 +59,7 @@
 
 (defn get-results
   [id]
-  (json (questionnaires/results id))
-  )
+  (json (questionnaires/results id)))
 
 (defn get-urls
   [id req]

@@ -60,6 +60,7 @@ define(function(require) {
       return state;
     };
 
+
     var validChoice = function(state) {
       if (!state) {
         return false;
