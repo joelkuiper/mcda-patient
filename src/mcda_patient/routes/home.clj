@@ -2,6 +2,7 @@
   (:require [mcda-patient.layout :as layout]
             [mcda-patient.db.questionnaires :as questionnaires]
             [ring.util.response :as response]
+            [noir.response :refer [redirect]]
             [taoensso.timbre :as timbre]
             [compojure.core :refer :all]
             [clojure.java.io :as io]))
@@ -23,6 +24,7 @@
   (response/status {} 200))
 
 (defroutes home-routes
+  (GET "/" [] (redirect "/admin"))
   (context "/:url-part" [url-part]
            (POST "/" [:as req] (save url-part req))
            (GET  "/" [:as req] (home url-part req))))
