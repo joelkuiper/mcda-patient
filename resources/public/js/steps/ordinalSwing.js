@@ -75,7 +75,6 @@ define(function(require) {
       next(choice);
 
       if (_.size(nextState.choices) === 1) {
-        console.log("Last question");
         next(_.keys(nextState.choices)[0]);
       }
 

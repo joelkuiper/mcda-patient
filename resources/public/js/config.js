@@ -16,10 +16,10 @@ define(function(require) {
     handler: 'explainTradeOff',
     templateUrl: 'explainTradeOff.html'
   }, {
-    id: 'exact-swing',
-    title: 'Exact Swing Elicitation',
-    handler: 'exactSwing',
-    templateUrl: 'exactSwing.html'
+    id: 'bisection-swing',
+    title: 'Bisection Swing Elicitation',
+    handler: 'bisectionSwing',
+    templateUrl: 'bisectionSwing.html'
   }];
 
   return {

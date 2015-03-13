@@ -131,20 +131,25 @@ define(function(require) {
         criterion: '=of'
       },
       link: function(scope, element) {
-        var c = scope.criterion;
+        var init = function() { 
+          var c = scope.criterion;
 
-        var hasDescription = !!c.description;
-        var dimensionlessUnits = ["proportion"];
-        var isDimensionless = !c.unitOfMeasurement || dimensionlessUnits.indexOf(c.unitOfMeasurement.toLowerCase()) !== -1;
+          var hasDescription = !!c.description;
+          var dimensionlessUnits = ["proportion"];
+          var isDimensionless = !c.unitOfMeasurement || dimensionlessUnits.indexOf(c.unitOfMeasurement.toLowerCase()) !== -1;
 
-        var text;
-        if(hasDescription) {
-          text = c.description.replace(/(\.$)/g, "") + " (" + c.title + (!isDimensionless ? ", " + c.unitOfMeasurement : "") + ")";
-        } else {
-          text = c.title + (!isDimensionless ? " " + c.unitOfMeasurement : "");
+          var text;
+          if(hasDescription) {
+            text = c.description.replace(/(\.$)/g, "") + " (" + c.title + (!isDimensionless ? ", " + c.unitOfMeasurement : "") + ")";
+          } else {
+            text = c.title + (!isDimensionless ? " " + c.unitOfMeasurement : "");
 
+          }
+          scope.text = text;
         }
-        scope.text = text;
+
+        init();
+        scope.$watch('criterion', init, true);
       },
       template: "<span>{{text}}</span>"
     };
