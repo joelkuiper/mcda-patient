@@ -41,9 +41,9 @@
   [title problem num-urls]
   (let [id (first (vals (create<! {:title title :problem (round-trip-json problem)})))
         urls (map vector (repeat id) (take num-urls (repeatedly random-url)))]
-    (debug "inserting" urls "with id" id)
     (jdbc/with-db-transaction [tx db-spec]
-      (doall (map (fn [[id url]] (insert-result! {:id id :url url} {:connection tx})) urls)))
+      (doall
+       (map (fn [[id url]] (insert-result! {:id id :url url} {:connection tx})) urls)))
     id))
 
 (defn edit!
@@ -68,7 +68,8 @@
   [id]
   (jdbc/with-db-transaction [tx db-spec]
     (let [results (get-results-by-id {:id id} {:connection tx})]
-      (doall (map (fn [result] (assoc result :answers (parse-string (clob-to-string (:answers result))))) results)))))
+      (doall
+       (map (fn [result] (assoc result :answers (parse-string (clob-to-string (:answers result))))) results)))))
 
 (defn get-urls
   [id]
