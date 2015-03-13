@@ -69,6 +69,15 @@ input[type='file'] {
     height: 0.45rem;
 }
 
+table.bisection {
+    tr:nth-of-type(even) {
+        background-color: transparent !important;
+    }
+    tr.second {
+        background-color: $white-smoke !important;
+    }
+}
+
 /*
 * This product includes color specifications and designs developed by Cynthia
 * Brewer (http://colorbrewer.org/).
