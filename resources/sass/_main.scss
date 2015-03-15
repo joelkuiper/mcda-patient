@@ -70,6 +70,9 @@ input[type='file'] {
 }
 
 table.bisection {
+    td {
+        cursor: pointer;
+    }
     tr:nth-of-type(even) {
         background-color: transparent !important;
     }
