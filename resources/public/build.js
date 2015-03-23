@@ -7,6 +7,7 @@
   findNestedDependencies: true,
   optimize: "uglify2",
   removeCombined: true,
+  optimizeCss: 'default',
   uglify2: {
     mangle: false
   },

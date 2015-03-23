@@ -8,8 +8,6 @@ images_dir = "public/img"
 javascripts_dir = "public/js"
 
 add_import_path "sass-shared"
-# You can select your preferred output style here (can be overridden via the command line):
-output_style = :compressed
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 relative_assets = true
