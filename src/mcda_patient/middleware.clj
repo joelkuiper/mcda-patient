@@ -15,10 +15,8 @@
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.backends.session :refer [session-backend]]))
 
-(defn log-request [handler]
-  (fn [req]
-    (timbre/debug req)
-    (handler req)))
+(def truthy?  #{"true" "TRUE" "True" "yes" "YES" "y" "1"})
+(def in-dev (truthy? (:dev env)))
 
 (defn development-middleware [handler]
   (if (env :dev)
@@ -37,5 +35,8 @@
       {:timeout (* 60 30)
        :timeout-response (redirect "/")})
      (wrap-defaults
-      (assoc-in site-defaults [:session :store] (memory-store session/mem)))
+      (->
+       site-defaults
+       (assoc-in [:static :resources] (if in-dev "public" "build"))
+       (assoc-in [:session :store] (memory-store session/mem))))
      (wrap-internal-error :log #(timbre/error %))))

@@ -2,6 +2,7 @@
 /lib
 /classes
 /checkouts
+resources/build
 pom.xml
 *.jar
 *.class
@@ -40,4 +41,5 @@ Thumbs.db
 nbproject
 *.sublime-project
 *.sublime-workspace
+
 

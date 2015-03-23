@@ -2,15 +2,15 @@
 
 require.config({
   paths: {
-    'jQuery': 'bower_components/jquery/dist/jquery',
-    'underscore': 'bower_components/underscore/underscore',
-    'angular': 'bower_components/angular/angular',
-    'angular-resource': 'bower_components/angular-resource/angular-resource',
-    'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router',
-    'jquery-slider': 'bower_components/jslider/dist/jquery.slider',
-    'mmfoundation': 'bower_components/angular-foundation/mm-foundation-tpls'
+    'jQuery': '../bower_components/jquery/dist/jquery',
+    'underscore': '../bower_components/underscore/underscore',
+    'angular': '../bower_components/angular/angular',
+    'angular-resource': '../bower_components/angular-resource/angular-resource',
+    'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
+    'jquery-slider': '../bower_components/jslider/dist/jquery.slider',
+    'mmfoundation': '../bower_components/angular-foundation/mm-foundation-tpls'
   },
-  baseUrl: '.',
+  baseUrl: 'js',
   shim: {
     'angular': { exports : 'angular' },
     'angular-resource': { deps:['angular'], exports: 'angular-resource' },
@@ -25,7 +25,7 @@ require.config({
 
 define(function (require) {
   var angular = require("angular");
-  var app = require("js/elicit");
+  var app = require("elicit");
 
   angular.bootstrap(document, ['elicit']);
 });
