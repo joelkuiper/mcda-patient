@@ -5,6 +5,7 @@
   useStrict: true,
   optimize: 'uglify2',
   removeCombined: true,
+  findNestedDependencies: true,
   optimizeCss: 'default',
   mainConfigFile: './js/main.js',
   uglify2: {
