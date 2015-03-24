@@ -1,10 +1,20 @@
 'use strict';
 define(function(require) {
   var steps = [{
-    id: 'Introduction',
-    title: 'Introduction',
+    id: 'consent',
+    title: 'Consent form',
+    handler: 'consent',
+    templateUrl: 'consent.html'
+  }, {
+    id: 'introduction',
+    title: 'General introduction',
     handler: 'introduction',
     templateUrl: 'introduction.html'
+  }, {
+    id: 'explainOrdinal',
+    title: 'What is ordinal elicitation',
+    handler: 'explainOrdinal',
+    templateUrl: 'explainOrdinal.html'
   }, {
     id: 'ordinal-swing',
     title: 'Ordinal Swing Elicitation',

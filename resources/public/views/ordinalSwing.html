@@ -1,19 +1,36 @@
-<div>
-  <div class="row">
-    <div class="columns large-12">
-      <h3 ng-bind="state.title"></h3>
-      <h5 class="subheader">Given the following situation:</h5>
-      <ul class="inline-list">
-        <li ng-repeat="(criterion, value) in state.reference track by $index">
-          {{state.problem.criteria[criterion].title}} = {{value | number }}
-        </li>
-      </ul>
-
-      <h5 class="subheader">Which of these improvements is most desired:</h5>
-      <label ng-repeat="(choice, alternative) in state.choices">
-        <input type="radio" ng-model="state.choice" value="{{choice}}" />
-        <criterion of="state.problem.criteria[choice]"></criterion> &rarr; {{alternative[choice] | number }}
-      </label>
+<div class="row">
+  <div class="columns large-12">
+    <h3 ng-bind="state.title"></h3>
+    <div ng-if="state.prefs.ordinal.length == 0">
+      Imagine that you are currently on a treatment that has all of the following effects:
     </div>
+    <div ng-if="state.prefs.ordinal.length > 0">
+      After your previous selection, the treatment now has the following effects:
+    </div>
+
+    <ul>
+      <li ng-repeat="(criterion, value) in state.reference track by $index">
+        <label>{{state.problem.criteria[criterion].title}} = {{value | number }}</label>
+      </li>
+    </ul>
+
+
+    <div ng-if="state.prefs.ordinal.length == 0">
+      <p>You are given the opportunity to upgrade the performance of this treatment on one of these outcomes.<br>
+        Which of the following options would you prefer:</p>
+    </div>
+    <div ng-if="state.prefs.ordinal.length > 0">
+      <p>You are given the opportunity to upgrade the performance of this treatment on yet another outcome.<br>
+        Which of the following options would you prefer:</p>
+    </div>
+
+
+    <form>
+      <label ng-repeat="(choice, alternative) in state.choices" ng-init="c = state.problem.criteria[choice]">
+        <input type="radio" ng-model="state.choice" value="{{choice}}"/>
+        {{c.pvf.direction | capitalize}} {{c.title}} from {{pvf.worst(c) | number}} {{c.unitOfMeasurement}} to {{alternative[choice] | number}} {{c.unitOfMeasurement}}
+      </label>
+    </form>
+    <br>
   </div>
 </div>

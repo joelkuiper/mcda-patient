@@ -1,39 +1,29 @@
-<div>
-  <div class="row">
-    <div class="columns large-12">
-      <h3>{{title(state.step, state.total)}}</h3>
-      <h5 class="subheader">Determining the relative importance of:</h5>
-      <ul>
-        <li ng-repeat="criterion in [state.criterionA, state.criterionB] track by $index">
-          <criterion of="state.problem.criteria[criterion]"></criterion>
-          ({{pvf.worst(state.problem.criteria[criterion]) | number}} &rarr;
-          {{pvf.best(state.problem.criteria[criterion]) | number}})
-        </li>
-      </ul>
+<div class="row">
+  <div class="columns large-12">
+    <h3>{{title(state.step, state.total)}}</h3>
+
+    Consider the following two options:
+
+    <dl>
+      <dt>Treatment A</dt>
+      <dd>
+        <label ng-init="a = state.problem.criteria[state.criterionA]">{{a.title}} =  {{pvf.worst(a) | number}} {{a.unitOfMeasurement}}</label>
+        <label ng-init="b = state.problem.criteria[state.criterionB]">{{b.title}} =  {{pvf.best(b) | number}} {{b.unitOfMeasurement}}</label>
+      </dd>
+
+      <dt>Treatment B</dt>
+      <dd>
+        <label ng-init="a = state.problem.criteria[state.criterionA]">{{a.title}} =  {{pvf.inv(a)(state.cutoff) | number}} {{a.unitOfMeasurement}}</label>
+        <label ng-init="b = state.problem.criteria[state.criterionB]">{{b.title}} =  {{pvf.worst(b) | number}} {{b.unitOfMeasurement}}</label>
+      </dd>
+    </dl>
 
 
-      <h5 class="subheader">Select the alternative you prefer:</h5>
-      <table role="grid" cellspacing="0" class="large-8 bisection">
-        <tr style="vertical-align: middle" ng-click="state.choice = state.criterionB">
-          <td rowspan="2"><input type="radio" ng-model="state.choice" value="{{state.criterionB}}"></td>
-          <td><criterion of="state.problem.criteria[state.criterionA]"></criterion></td>
-          <td>= {{pvf.worst(state.problem.criteria[state.criterionA]) | number}}</td>
-        </tr>
-        <tr ng-click="state.choice = state.criterionB">
-          <td><criterion of="state.problem.criteria[state.criterionB]"></criterion></td>
-          <td width="100">= {{pvf.best(state.problem.criteria[state.criterionB]) | number}}</td>
-        </tr>
+    Which of these options would you prefer:
+    <form>
+      <input type="radio" ng-model="state.choice" value="{{state.criterionB}}" id="criterion-b"><label for="criterion-b">Treatment A</label><br>
+      <input type="radio" ng-model="state.choice" value="{{state.criterionA}}" id="criterion-a"><label for="criterion-a">Treatment B</label>
+    </form>
 
-        <tr class="second" style="vertical-align: middle" ng-click="state.choice = state.criterionA">
-          <td rowspan="2"><input type="radio" ng-model="state.choice" value="{{state.criterionA}}"></td>
-          <td><criterion of="state.problem.criteria[state.criterionA]"></criterion></td>
-          <td>= {{pvf.inv(state.problem.criteria[state.criterionA])(state.cutoff) | number}}</td>
-        </tr>
-        <tr class="second" ng-click="state.choice = state.criterionA">
-          <td><criterion of="state.problem.criteria[state.criterionB]"></criterion></td>
-          <td width="100">= {{pvf.worst(state.problem.criteria[state.criterionB]) | number}}</td>
-        </tr>
-      </table>
-    </div>
   </div>
 </div>

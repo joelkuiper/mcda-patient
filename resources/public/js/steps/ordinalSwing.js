@@ -19,12 +19,12 @@ define(function(require) {
     };
 
     var title = function(state) {
-      var base = 'Ordinal SWING weighting';
+      var base = 'Part 1: question ';
       var total = (_.size(criteria) - 1);
       if (state > total) {
         return base + ' (DONE)';
       }
-      return base + ' (' + state + '/' + total + ')';
+      return base + state + '/' + total;
     };
 
     var initialize = function(state) {

@@ -1,29 +1,30 @@
-<div>
-  <div class="row">
-    <div class="columns large-12">
-      <h3>Introduction</h3>
-      <h5>Who has prepared this questionnaire?</h5>
-      <p>This questionnaire was prepared by the University Medical Center Groningen in collaboration with the European Medicines Agency (EMA). The EMA is the regulatory body responsible for the evaluation and supervision of medicines in the EU (<a href="http://www.ema.europa.eu">www.ema.europa.eu</a>). Patients are regularly involved in the work of the EMA in many different ways.
-        Currently, the EMA is exploring different ways of collecting information about how people value the outcomes of medicines. The Agency is exploring some of these methods to see if they could be useful during its assessment of the benefits and risks of medicines.</p>
+<div class="row">
+  <div class="columns large-10">
+    <h3>General instructions</h3>
 
-      <h5>What is EMA expecting from you?</h5>
-      <p>This questionnaire intended to help understand some of the typical outcomes (both good and bad) of different medicines.
-        Different people will feel that some of these things are more important to them than others, so it’s important that you tell us about the values that are right for you personally.</p>
+    <p>We ask you to consider a situation of a medicine to treat a patient
+      with an advanced cancer. Advanced cancers have usually spread from
+      where they started to other parts of the body. This is known as
+      metastatic cancer. But not all advanced cancers are metastatic. For
+      example, some cancers may be considered advanced because they cannot
+      be cured and are life-threatening even though they have not spread
+      to other parts of the body.</p>
 
-      <h5>What are probabilities?</h5>
-      <p>In medicine, there is never certainty about the outcomes, whether good or bad. Therefore, when receiving treatment, it is impossible to state with certainty, for example, that “this treatment will prolong my life by 12 months”. We can however describe the extent to which something is likely to happen or be the case. For example, suppose that we know from previous observations that out of 100 patients taking the treatment 45 are still alive 12 months after the start of the treatment. We then say that the probability of surviving the first 12 months is 45 out of 100 (or 45%).
-        In this questionnaire, probabilities will be expressed using percentages.</p>
+    <p>To express the effect of a medicine for
+      the person taking it, we will use probabilities of a certain
+      outcome. For example, suppose that we know from previous studies
+      that out of 100 patients taking the treatment 45 are still alive 12
+      months after the start of the treatment. We then say that the
+      probability of surviving 12 months is 45 out of 100 (or 45%).</p>
 
-      <h5>What is the exercise I will be expected to complete?</h5>
-      <p>
-        In order to assess how you value the different outcomes described, we will be asking you two types of question- Direct- rating and Trade-off.
-        Direct rating questions are those where you will be asked to choose from a list of possible improvements to the benefit-risk profile of a hypothetical treatment;
-        The purpose of the direct rating questions is to gain a better understanding of the relative importance that you attach to the different outcomes in a treatment. In each of these questions, you will be provided with a specific starting situation and a list of improvements to this situation.
-        Your task will then be to select the improvement that you consider most desired. </p>
+    <p>The following outcomes are included in this questionnaire:</p>
+    <ul>
+      <li ng-repeat="criterion in state.problem.criteria">{{criterion.title}}</li>
+    </ul>
 
-      <p>Your participation is entirely voluntary. If you do decide to participate in this experience, the information you provide will be collected and handled anonymously. If the results are published, you will have access to them prior to publication.
-      </p>
-      <input type="checkbox" ng-model="state.consent" id="consent"><label for="consent">I would like to participate in this research</label>
-    </div>
+    <p>In terms of signs and symptoms, consider the perspective of a
+      patient who is able to carry on normal activity and has only minor
+      signs or symptoms of disease (this is referred to as a performance
+      status of 90% or more, using a conventional scale).</p>
   </div>
 </div>

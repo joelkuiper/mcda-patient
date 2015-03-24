@@ -26,11 +26,11 @@ define(function(require) {
     $scope.pvf = pvf;
 
     $scope.title = function(step, total) {
-      var base = 'Bisection weighting';
+      var base = 'Part 2: question ';
       if (step > total) {
         return base + ' (DONE)';
       }
-      return base + ' (' + step + '/' + total + ')';
+      return base + step + '/' + total;
     };
 
     function buildInitial(criterionA, criterionB, step) {

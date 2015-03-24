@@ -14,6 +14,7 @@ define(function(require) {
   require('./services/partialValueFunction');
   require('./controllers');
   require('./directives');
+  require('./filters');
 
   var dependencies = [
     'ngResource',
@@ -24,6 +25,7 @@ define(function(require) {
     'elicit.errorHandling',
     'elicit.pvfService',
     'elicit.directives',
+    'elicit.filters',
     'elicit.controllers',
     'elicit.workspaceResource'
   ];
