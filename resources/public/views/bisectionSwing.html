@@ -7,14 +7,14 @@
     <dl>
       <dt>Treatment A</dt>
       <dd>
-        <label ng-init="a = state.problem.criteria[state.criterionA]">{{a.title}} =  {{pvf.worst(a) | number}} {{a.unitOfMeasurement}}</label>
-        <label ng-init="b = state.problem.criteria[state.criterionB]">{{b.title}} =  {{pvf.best(b) | number}} {{b.unitOfMeasurement}}</label>
+        <label>{{state.a.title}} = {{pvf.worst(state.a) | number}} {{state.a.unitOfMeasurement}}</label>
+        <label>{{state.b.title}} = {{pvf.best(state.b) | number}} {{state.b.unitOfMeasurement}}</label>
       </dd>
 
       <dt>Treatment B</dt>
       <dd>
-        <label ng-init="a = state.problem.criteria[state.criterionA]">{{a.title}} =  {{pvf.inv(a)(state.cutoff) | number}} {{a.unitOfMeasurement}}</label>
-        <label ng-init="b = state.problem.criteria[state.criterionB]">{{b.title}} =  {{pvf.worst(b) | number}} {{b.unitOfMeasurement}}</label>
+        <label>{{state.a.title}} = {{pvf.inv(state.a)(state.cutoff) | number}} {{state.a.unitOfMeasurement}}</label>
+        <label>{{state.b.title}} = {{pvf.worst(state.b) | number}} {{state.b.unitOfMeasurement}}</label>
       </dd>
     </dl>
 

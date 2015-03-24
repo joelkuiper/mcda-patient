@@ -33,16 +33,18 @@ define(function(require) {
       return base + step + '/' + total;
     };
 
-    function buildInitial(criterionA, criterionB, step) {
+    function buildInitial(state, criterionA, criterionB, step) {
       var bounds = pvf.getBounds(criteria[criterionA]);
-      var state =  {
+      var initial = {
         step: step,
         total: (_.size(criteria) - 1) * 2,
         criterionA: criterionA,
         criterionB: criterionB,
-        cutoff: 0.5
+        cutoff: 0.5,
+        a: state.problem.criteria[criterionA],
+        b: state.problem.criteria[criterionB]
       };
-      return state;
+      return initial;
     }
 
     var initialize = function(state) {
@@ -51,7 +53,7 @@ define(function(require) {
         'criteriaOrder': getCriteriaOrder(state.prefs)
       });
 
-      state = _.extend(state, buildInitial(state.criteriaOrder[0], state.criteriaOrder[1], 1));
+      state = _.extend(state, buildInitial(state, state.criteriaOrder[0], state.criteriaOrder[1], 1));
       return state;
     };
 
@@ -88,7 +90,7 @@ define(function(require) {
           step: idx + 1
         };
       } else {
-        next = buildInitial(order[idx], order[idx + 1], 2 * idx + 1);
+        next = buildInitial(state, order[idx], order[idx + 1], 2 * idx + 1);
       }
 
       function getRatioBounds(state) {
@@ -130,7 +132,13 @@ define(function(require) {
     return {
       isFinished: isFinished,
       validChoice: validChoice,
-      fields: ['prefs', 'total', 'choice', 'criteriaOrder', 'criterionA', 'criterionB', 'cutoff'],
+      fields: ['total',
+               'choice',
+               'criteriaOrder',
+               'a', 'b',
+               'criterionA',
+               'criterionB',
+               'cutoff'],
       nextState: nextState,
       standardize: _.identity,
       save: save,
