@@ -2,13 +2,23 @@
 
 require.config({
   paths: {
-    'jQuery': '../bower_components/jquery/dist/jquery',
-    'underscore': '../bower_components/underscore/underscore',
-    'angular': '../bower_components/angular/angular',
-    'angular-resource': '../bower_components/angular-resource/angular-resource',
-    'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
-    'jquery-slider': '../bower_components/jslider/dist/jquery.slider',
-    'mmfoundation': '../bower_components/angular-foundation/mm-foundation-tpls'
+    'jQuery':
+    '../bower_components/jquery/dist/jquery.min',
+    'underscore':
+    '../bower_components/underscore/underscore-min',
+    'angular':
+    ['//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0-beta.6/angular.min',
+     '../bower_components/angular/angular.min'],
+    'angular-resource':
+    ['//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0-beta.6/angular-resource.min',
+     '../bower_components/angular-resource/angular-resource.min'],
+    'angular-ui-router': [
+      '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min',
+      '../bower_components/angular-ui-router/release/angular-ui-router.min'],
+    'jquery-slider':
+    '../bower_components/jslider/dist/jquery.slider.min',
+    'mmfoundation':
+    '../bower_components/angular-foundation/mm-foundation-tpls.min'
   },
   baseUrl: 'js',
   shim: {
