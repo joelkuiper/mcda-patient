@@ -18,7 +18,7 @@
 
 (defn with-decoded-problem
   [questionnaire]
-  (update-in questionnaire :problem parse-string))
+  (update-in questionnaire [:problem] parse-string))
 
 (defn get
   ([id] (jdbc/with-db-transaction [tx db-spec] (get id tx)))
@@ -65,7 +65,7 @@
     (let [results (get-results-by-id {:id id} {:connection tx})]
       (doall
        (map (fn [result]
-              (update-in result :answers parse-string)) results)))))
+              (update-in result [:answers] parse-string)) results)))))
 
 (defn get-urls
   [id]

@@ -17,6 +17,7 @@
               ng-click="proceed(state)">Next</button>
       <button class="small button success"
               ng-if="isDone(state)"
+              ng-cloak
               ng-disabled="!canProceed(state)"
               ng-click="submit(state)">Finish</button>
     </div>
