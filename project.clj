@@ -17,7 +17,6 @@
                  [ring-middleware-format "0.4.0"]
                  [noir-exception "0.2.3"]
                  [bouncer "0.3.2"]
-                 [lib-noir "0.9.5"]
                  [prone "0.8.1"]
                  [buddy "0.4.1"]
                  [ragtime "0.3.8"]

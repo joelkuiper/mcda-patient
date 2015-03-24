@@ -2,8 +2,8 @@
   (:require [mcda-patient.layout :as layout]
             [compojure.core :refer :all]
             [taoensso.timbre :as timbre]
+            [cheshire.core :refer :all]
             [ring.util.response :as response]
-            [noir.response :refer [redirect json]]
             [mcda-patient.db.questionnaires :as questionnaires]))
 
 
@@ -42,16 +42,16 @@
   (let [{:keys [title problem urls]} params]
     (if (= id "new")
       (let [new-questionnaire (questionnaires/create! title problem (parse-int urls))]
-        (redirect (str "/admin/" new-questionnaire)))
+        (response/redirect (str "/admin/" new-questionnaire)))
       (do
         (questionnaires/edit! (parse-int id) title problem parse-int)
-        (redirect (str "/admin/" id))))))
+        (response/redirect (str "/admin/" id))))))
 
 (defn view
   [id req]
   (let [questionnaire (questionnaires/get id)
         results (questionnaires/results id)]
-    (if (not (nil? questionnaire))
+    (if-not (nil? questionnaire)
       (layout/render "admin/view.html"
                      {:results results
                       :questionnaire questionnaire})
@@ -59,12 +59,12 @@
 
 (defn get-results
   [id]
-  (json (questionnaires/results id)))
+  (generate-string (questionnaires/results id)))
 
 (defn get-urls
   [id req]
   (let [prefix (str (name (:scheme req))  "://" (get (:headers req) "host") "/")]
-    (loop [result "" urls (into [] (questionnaires/get-urls id))]
+    (loop [result "" urls (vec (questionnaires/get-urls id))]
       (if (empty? urls)
         result
         (recur (str result prefix (peek urls) "\n") (pop urls))))))
