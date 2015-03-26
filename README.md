@@ -1,19 +1,13 @@
-# {{name}}
+# Stakeholder preferences elicitation
 
-FIXME
+Internal project to elicit benefit-risk trade-offs from stakeholders in a questionnaire.
 
-## Prerequisites
+# To deploy
 
-You will need [Leiningen][1] 2.0 or above installed.
+We use Leiningen (Clojure) to build a stand-alone jar which is contained in a Docker container.
 
-[1]: https://github.com/technomancy/leiningen
-
-## Running
-
-To start a web server for the application, run:
-
-    lein ring server
-
-## License
-
-Copyright © {{year}} FIXME
+````
+lein ragtime migrate
+lein uberjar
+docker build -t mcda/server .
+````
