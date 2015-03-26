@@ -9,7 +9,10 @@ questionnaires.id
 
 -- name: get-questionnaire
 -- Gets a questionnaire by id
-SELECT questionnaires.* FROM questionnaires WHERE id = :id
+SELECT questionnaires.*
+FROM questionnaires
+WHERE id = :id
+LIMIT 1
 
 -- name: get-questionnaire-by-url
 -- Gets a questionnaire by id
@@ -53,11 +56,5 @@ WHERE url = :url
 -- name: get-results-by-id
 -- Gets the results associated with a specific questionnaire id
 SELECT results.*
-FROM results, questionnaires
-WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
-
--- name: get-urls-by-id
--- Gets a simple list of all the urls associated with a questionnaire id
-SELECT results.url
 FROM results, questionnaires
 WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
