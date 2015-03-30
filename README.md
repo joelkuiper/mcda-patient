@@ -13,7 +13,7 @@ cd resources/
 bower install
 compass compile # optional
 
-lein ring server-headless
+DEV=1 lein ring server-headless
 
 ````
 
