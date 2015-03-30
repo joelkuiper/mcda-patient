@@ -33,9 +33,7 @@
 
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
-            [lein-ancient "0.6.0"]
             [ragtime/ragtime.lein "0.3.8"]]
-
 
   :ring {:handler mcda-patient.handler/app
          :init    mcda-patient.handler/init
@@ -49,7 +47,8 @@
         }
 
   :profiles {:uberjar {:omit-source true
-                       :env {:production true}
+                       :env {:dev false
+                             :production true}
                        :aot :all}
              :production {:ring {:open-browser? false
                                  :stacktraces?  false
