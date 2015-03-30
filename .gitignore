@@ -42,4 +42,4 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 
-
+!.gitkeep
