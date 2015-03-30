@@ -32,7 +32,7 @@ We use Leiningen (Clojure) to build a stand-alone jar which is contained in a Do
 lein ragtime migrate
 lein uberjar
 
-cd resources && r.js -o build.js # optional to minify the assets, required if DEV=0
+cd resources && r.js -o public/build.js # optional to minify the assets, required if DEV=0
 
 docker build -t mcda/server .
 ````
