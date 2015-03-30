@@ -58,3 +58,8 @@ WHERE url = :url
 SELECT results.*
 FROM results, questionnaires
 WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id
+
+-- name: get-urls-by-id
+SELECT results.url
+FROM results, questionnaires
+WHERE results.questionnaire_id = questionnaires.id AND questionnaires.id = :id

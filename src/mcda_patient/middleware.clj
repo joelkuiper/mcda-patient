@@ -16,7 +16,7 @@
             [buddy.auth.backends.session :refer [session-backend]]))
 
 (def truthy?  #{"true" "TRUE" "True" "yes" "YES" "y" "1"})
-(def in-dev (truthy? (:dev env)))
+(def in-dev (truthy? (str (:dev env))))
 
 (defn development-middleware [handler]
   (if (env :dev)
