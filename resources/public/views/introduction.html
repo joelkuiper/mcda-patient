@@ -1,30 +1,11 @@
 <div class="row">
   <div class="columns large-10">
     <h3>General instructions</h3>
+    <p>In this survey, we will ask you to consider the following outcomes in the treatment of an advanced cancer:</p>
+    <dl style="margin-left: 2em">
+      <dt ng-repeat-start="criterion in state.problem.criteria"><strong>{{criterion.title}}</strong></dt>
+      <dd ng-repeat-end>{{criterion.description}}</dd>
+    </dl>
 
-    <p>We ask you to consider a situation of a medicine to treat a patient
-      with an advanced cancer. Advanced cancers have usually spread from
-      where they started to other parts of the body. This is known as
-      metastatic cancer. But not all advanced cancers are metastatic. For
-      example, some cancers may be considered advanced because they cannot
-      be cured and are life-threatening even though they have not spread
-      to other parts of the body.</p>
-
-    <p>To express the effect of a medicine for
-      the person taking it, we will use probabilities of a certain
-      outcome. For example, suppose that we know from previous studies
-      that out of 100 patients taking the treatment 45 are still alive 12
-      months after the start of the treatment. We then say that the
-      probability of surviving 12 months is 45 out of 100 (or 45%).</p>
-
-    <p>The following outcomes are included in this questionnaire:</p>
-    <ul>
-      <li ng-repeat="criterion in state.problem.criteria">{{criterion.title}}</li>
-    </ul>
-
-    <p>In terms of signs and symptoms, consider the perspective of a
-      patient who is able to carry on normal activity and has only minor
-      signs or symptoms of disease (this is referred to as a performance
-      status of 90% or more, using a conventional scale).</p>
-  </div>
+    </div>
 </div>
