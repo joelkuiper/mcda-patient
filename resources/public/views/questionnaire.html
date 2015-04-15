@@ -8,16 +8,15 @@
     <div class="columns large-12">
       <button class="small button" ng-click="previousState()" ng-disabled="!canReturn()">Previous</button>
       <button class="small button"
-              ng-show="!isFinished(state)"
+              ng-if="!isFinished(state)"
               ng-click="nextState(state)"
               ng-disabled="!canProceed(state)">Next</button>
       <button class="small button"
-              ng-show="isFinished(state) && !isDone(state)"
+              ng-if="isFinished(state) && !isDone(state)"
               ng-disabled="!canProceed(state)"
               ng-click="proceed(state)">Next</button>
       <button class="small button success"
-              ng-show="isDone(state)"
-              ng-cloak="true"
+              ng-if="isDone(state)"
               ng-disabled="!canProceed(state)"
               ng-click="submit(state)">Finish</button>
     </div>
