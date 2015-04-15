@@ -11,18 +11,18 @@
                  [environ "1.0.0"]
                  [im.chit/cronj "1.4.3"]
                  [cheshire "5.4.0"]
-                 [compojure "1.3.2"]
+                 [compojure "1.3.3"]
                  [ring/ring-defaults "0.1.4"]
                  [ring/ring-session-timeout "0.1.0"]
                  [ring-middleware-format "0.5.0"]
-                 [noir-exception "0.2.3"]
+                 [noir-exception "0.2.4"]
                  [bouncer "0.3.2"]
                  [prone "0.8.1"]
-                 [buddy "0.4.4"]
+                 [buddy "0.5.1"]
                  [ragtime "0.3.8"]
                  [yesql "0.5.0-rc1"]
                  [crypto-random "1.2.0"]
-                 [com.h2database/h2 "1.4.186"]]
+                 [com.h2database/h2 "1.4.187"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "mcda-patient.jar"
